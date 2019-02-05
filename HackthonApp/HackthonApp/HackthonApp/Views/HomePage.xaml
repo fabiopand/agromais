@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:HackathonApp.Views" x:Class="HackthonApp.Views.HomePage" Title="Agricon">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Icon="ic_plus" Text="Adicionar" Clicked="Handle_Clicked_1" />
+    </ContentPage.ToolbarItems>
+    <ContentPage Title="Cotações">
+        <ScrollView>
+            <StackLayout>
+                <Frame>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="40" />
+                            <RowDefinition Height="40" />
+                            <RowDefinition Height="40" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="Soja" FontFamily="{StaticResource CentraleSansRndBold}" FontSize="30" />
+                        <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="R$ 69,00" FontFamily="{StaticResource CentraleSansRndXBold}" FontSize="30" />
+                        <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center" Text="04/02/2018 16:05" TextColor="Gray" FontFamily="{StaticResource CentraleSansRndMedium}" />
+                        <Image Grid.Row="0" Grid.Column="2" Grid.RowSpan="2" Source="ic_soja" />
+                    </Grid>
+                </Frame>
+                <Frame>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="40" />
+                            <RowDefinition Height="40" />
+                            <RowDefinition Height="40" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="Milho" FontFamily="{StaticResource CentraleSansRndBold}" FontSize="30" />
+                        <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="R$ 28,00" FontFamily="{StaticResource CentraleSansRndXBold}" FontSize="30" />
+                        <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center" Text="04/02/2018 16:05" TextColor="Gray" FontFamily="{StaticResource CentraleSansRndMedium}" />
+                        <Image Grid.Row="0" Grid.Column="2" Grid.RowSpan="2" Source="ic_milho" />
+                    </Grid>
+                </Frame>
+                <Frame>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="40" />
+                            <RowDefinition Height="40" />
+                            <RowDefinition Height="40" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="Trigo" FontFamily="{StaticResource CentraleSansRndBold}" FontSize="30" />
+                        <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="R$ 47,00" FontFamily="{StaticResource CentraleSansRndXBold}" FontSize="30" />
+                        <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center" Text="04/02/2018 16:05" TextColor="Gray" FontFamily="{StaticResource CentraleSansRndMedium}" />
+                        <Image Grid.Row="0" Grid.Column="2" Grid.RowSpan="2" Source="ic_trigo" />
+                    </Grid>
+                </Frame>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage>
+    <ContentPage Title="Previsão do Tempo">
+        <ScrollView>
+            <StackLayout>
+                <Label Text="Hoje" FontSize="30" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center" />
+                <Image Source="img_prevtempo" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
+                <Label Text="Amanhã" FontSize="30" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center" />
+                <Image Source="img_prevtempo" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
+                <Label Text="2 dias" FontSize="30" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center" />
+                <Image Source="img_prevtempo" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
+            </StackLayout>
+        </ScrollView>
+    </ContentPage>
+    <ContentPage Title="Notícias">
+        <!-- <ListView HasEvenRows="true" ItemsSource="{Binding Source={x:Static local:HomePage.ListaNoticias}}"  >-->
+        <ListView ItemsSource="{Binding ListaNoticias}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell Text="{Binding Key}" Detail="{Binding Value}">
+                    </TextCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </ContentPage>
+</TabbedPage>

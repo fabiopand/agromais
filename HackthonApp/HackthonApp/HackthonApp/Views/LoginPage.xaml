@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:HackthonApp.Views" x:Class="HackthonApp.Views.LoginPage" Title="Entrar">
+    
+    <ScrollView>
+        <StackLayout Padding="10,100">
+            <Label Text="CPF" HorizontalOptions="StartAndExpand" />
+            <Entry Placeholder="123456789-00" HorizontalOptions="FillAndExpand" Text="{Binding Produtor.CPF}"/>
+            <Label Text="Senha" Margin="0,20,0,0" HorizontalOptions="StartAndExpand" />
+            <Entry Text="{Binding Produtor.Senha}" IsPassword="true" HorizontalOptions="FillAndExpand" />
+            <Button Text="Entrar" Margin="0,30,0,0" Clicked="Handle_Clicked">
+            </Button>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

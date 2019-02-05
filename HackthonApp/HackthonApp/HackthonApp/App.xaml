@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="HackthonApp.App">
+    <Application.Resources>
+      <ResourceDictionary>
+
+            <!-- Cores Estáticas -->
+            <Color x:Key="Vermelho">#ffef3340</Color>
+            <Color x:Key="Preto">#ff3d3935</Color>
+            <Color x:Key="VerdeEscuro">#ff285C4D</Color>
+            <Color x:Key="VerdeClaro">#ff6CC24A</Color>
+            <Color x:Key="Verde">#ff5e9865</Color>
+            <Color x:Key="Roxo">#ff8A1B61</Color>
+            <Color x:Key="Laranja">#ffFF7F41</Color>
+            <Color x:Key="Amarelo">#ffFFB500</Color>
+            <Color x:Key="AmareloVerde">#ffDBE442</Color>
+            <Color x:Key="Rosa">#ffE03E52</Color>
+            <Color x:Key="Azul">#ff005587</Color>
+            <Color x:Key="AzulClaro">#ff0072CE</Color>
+            <Color x:Key="Branco">#FFFFFFFF</Color>
+
+
+            <!-- Fontes Centrale Sans -->
+            <OnPlatform x:TypeArguments="x:String" x:Key="CentraleSansRndBold">
+                <On Platform="Android" Value="CentraleSansRnd-Bold.otf#CentraleSansRndBold" />
+                <On Platform="UWP" Value="/Assets/CentraleSansRnd-Bold.otf#CentraleSansRndBold" />
+                <On Platform="iOS" Value="CentraleSansRndBold" />
+            </OnPlatform>
+            <OnPlatform x:TypeArguments="x:String" x:Key="CentraleSansRndBoldSF">
+                <On Platform="Android" Value="CentraleSansRnd-Bold.otf" />
+                <On Platform="UWP" Value="/Assets/CentraleSansRnd-Bold.otf#CentraleSansRndBold" />
+                <On Platform="iOS" Value="CentraleSansRndBold" />
+            </OnPlatform>
+            <OnPlatform x:TypeArguments="x:String" x:Key="CentraleSansRndBook">
+                <On Platform="Android" Value="CentraleSansRnd-Book.otf#CentraleSansRndBook" />
+                <On Platform="UWP" Value="/Assets/CentraleSansRnd-Book.otf#CentraleSansRndBook" />
+                <On Platform="iOS" Value="CentraleSansRndBook" />
+            </OnPlatform>
+            <OnPlatform x:TypeArguments="x:String" x:Key="CentraleSansRndBookSF">
+                <On Platform="Android" Value="CentraleSansRnd-Book.otf" />
+                <On Platform="UWP" Value="/Assets/CentraleSansRnd-Book.otf#CentraleSansRndBook" />
+                <On Platform="iOS" Value="CentraleSansRndBook" />
+            </OnPlatform>
+            <OnPlatform x:TypeArguments="x:String" x:Key="CentraleSansRndLight">
+                <On Platform="Android" Value="CentraleSansRnd-Light.otf#CentraleSansRndLight" />
+                <On Platform="UWP" Value="/Assets/CentraleSansRnd-Light.otf#CentraleSansRndLight" />
+                <On Platform="iOS" Value="CentraleSansRndLight" />
+            </OnPlatform>
+            <OnPlatform x:TypeArguments="x:String" x:Key="CentraleSansRndLightSF">
+                <On Platform="Android" Value="CentraleSansRnd-Light.otf" />
+                <On Platform="UWP" Value="/Assets/CentraleSansRnd-Light.otf#CentraleSansRndLight" />
+                <On Platform="iOS" Value="CentraleSansRndLight" />
+            </OnPlatform>
+            <OnPlatform x:TypeArguments="x:String" x:Key="CentraleSansRndMedium">
+                <On Platform="Android" Value="CentraleSansRnd-Medium.otf#CentraleSansRndMedium" />
+                <On Platform="UWP" Value="/Assets/CentraleSansRnd-Medium.otf#CentraleSansRndMedium" />
+                <On Platform="iOS" Value="CentraleSansRndMedium" />
+            </OnPlatform>
+            <OnPlatform x:TypeArguments="x:String" x:Key="CentraleSansRndMediumSF">
+                <On Platform="Android" Value="CentraleSansRnd-Medium.otf" />
+                <On Platform="UWP" Value="/Assets/CentraleSansRnd-Medium.otf#CentraleSansRndMedium" />
+                <On Platform="iOS" Value="CentraleSansRndMedium" />
+            </OnPlatform>
+            <OnPlatform x:TypeArguments="x:String" x:Key="CentraleSansRndXBold">
+                <On Platform="Android" Value="CentraleSansRnd-XBold.otf#CentraleSansRndXBold" />
+                <On Platform="UWP" Value="/Assets/CentraleSansRnd-XBold.otf#CentraleSansRndXBold" />
+                <On Platform="iOS" Value="CentraleSansRndXBold" />
+            </OnPlatform>
+            <OnPlatform x:TypeArguments="x:String" x:Key="CentraleSansRndXBoldSF">
+                <On Platform="Android" Value="CentraleSansRnd-XBold.otf" />
+                <On Platform="UWP" Value="/Assets/CentraleSansRnd-XBold.otf#CentraleSansRndXBold" />
+                <On Platform="iOS" Value="CentraleSansRndXBold" />
+            </OnPlatform>
+            <OnPlatform x:TypeArguments="x:String" x:Key="IconFontAwesome">
+                <On Platform="Android" Value="fa-solid-900.ttf#fa-solid-900" />
+                <On Platform="UWP" Value="/Assets/fa-solid-900.ttf#fa-solid-900" />
+                <On Platform="iOS" Value="Font Awesome 5 Free" />
+            </OnPlatform>
+            <OnPlatform x:TypeArguments="x:String" x:Key="IconFontAwesomeSF">
+                <On Platform="Android" Value="fa-solid-900.ttf" />
+                <On Platform="UWP" Value="/Assets/fa-solid-900.ttf#fa-solid-900" />
+                <On Platform="iOS" Value="Font Awesome 5 Free" />
+            </OnPlatform>
+
+
+
+            <!-- Estilo de elementos -->
+            <Style TargetType="Frame">
+                <Setter Property="Margin" Value="10" />
+                <Setter Property="BackgroundColor" Value="LightGray" />
+                <Setter Property="BorderColor" Value="LightGray" />
+                <Setter Property="CornerRadius" Value="10" />
+            </Style>
+            <Style TargetType="Picker">
+                <Setter Property="FontFamily" Value="{StaticResource CentraleSansRndMedium}" />
+                <Setter Property="TextColor" Value="{StaticResource Preto}" />
+            </Style>
+            <Style TargetType="Label">
+                <Setter Property="FontFamily" Value="{StaticResource CentraleSansRndBold}" />
+                <Setter Property="TextColor" Value="{StaticResource Preto}" />
+                <Setter Property="FontSize" Value="Large" />
+            </Style>
+            <Style TargetType="Button">
+                <Setter Property="FontFamily" Value="{StaticResource CentraleSansRndBold}" />
+                <Setter Property="TextColor" Value="#FFFFFF" />
+                <Setter Property="FontSize" Value="Large" />
+                <Setter Property="BackgroundColor" Value="{StaticResource VerdeEscuro}" />
+                <Setter Property="BorderRadius" Value="10" />
+            </Style>
+            <Style TargetType="Entry">
+                <Setter Property="FontFamily" Value="{StaticResource CentraleSansRndMedium}" />
+                <Setter Property="TextColor" Value="{StaticResource Preto}" />
+                 <Setter Property="FontSize" Value="Large" />
+            </Style>
+            <Style TargetType="Switch">
+                <Setter Property="OnColor" Value="{StaticResource Vermelho}" />
+                <Setter Property="BackgroundColor" Value="#FFFFFF" />
+            </Style>
+            <Style TargetType="ActivityIndicator">
+                <Setter Property="Color" Value="{StaticResource Vermelho}" />
+            </Style>
+
+            <Style x:Key="labelDestaque" TargetType="Label">
+                <Setter Property="FontFamily" Value="{StaticResource CentraleSansRndXBold}" />
+                <Setter Property="TextColor" Value="{StaticResource Preto}" />
+            </Style>
+
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

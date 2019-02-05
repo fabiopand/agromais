@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="HackthonApp.Views.ValoresPage" Title="Custos">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Margin="20">
+                <Label Margin="0,50,0,0" Text="Verifique/informe os custos" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center" FontSize="Large" />
+                <Label Text="Insumos" Margin="0,20,0,0" />
+                <Entry Text="{Binding Despesas.Insumos, StringFormat='{0:C2}'}" />
+                <Label Text="Custos Operacionais (Máquinas, Funcionários...)" Margin="0,20,0,0" />
+                <Entry Text="{Binding Despesas.Operacionais, StringFormat='{0:C2}'}" />
+                <Label Text="Outros Custos" Margin="0,20,0,0" />
+                <Entry Text="{Binding Despesas.Outros, StringFormat='{0:C2}'}" />
+                <Button Text="Próximo" Margin="0,30,0,0" Clicked="Handle_ProximoClicked">
+                </Button>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

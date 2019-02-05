@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="HackthonApp.Views.PropriedadePage" Title="Propriedades">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Icon="ic_plus" Text="Adicionar" Clicked="Handle_Clicked" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Margin="20">
+                <Label Margin="0,50,0,0" Text="Selecione a Propriedade" HorizontalOptions="CenterAndExpand" FontSize="Large" />
+                <Picker Title="Selecione uma propriedade" Margin="0,20,0,20" ItemsSource="{Binding ListaPropriedades}" SelectedItem="{Binding Propriedade}" ItemDisplayBinding="{Binding Nome}" />
+                <Button Text="Próximo" Clicked="Handle_ProximoClicked">
+                </Button>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

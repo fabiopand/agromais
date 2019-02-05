@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="HackthonApp.Views.ResultadosSimulacoesPage" Title="Agricon">
+      <ContentPage.ToolbarItems>
+        <ToolbarItem Icon="ic_logout" Text="Sair" Clicked="Handle_Clicked_1" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout Margin="5">
+            <Button Text="Nova Consulta" Margin="0,20" Clicked="Handle_Clicked" />
+            <ListView ItemsSource="{Binding Lista}" HasUnevenRows="true">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout>
+                                <Frame>
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="30" />
+                                            <RowDefinition Height="30" />
+                                            <RowDefinition Height="30" />
+                                            <RowDefinition Height="30" />
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <Label Grid.Row="0" Grid.Column="0" Text="Rentabilidade: " />
+                                        <Label Grid.Row="0" Grid.Column="1" FontFamily="{StaticResource CentraleSansRndXBold}" Text="{Binding Rentabilidade, StringFormat='{0:C2}'}">
+                                        </Label>
+                                        <Label Grid.Row="1" Grid.Column="0" Text="Preço: " />
+                                        <Label Grid.Row="1" Grid.Column="1" FontFamily="{StaticResource CentraleSansRndXBold}" Text="{Binding Preco, StringFormat='{0:C2}'}">
+                                        </Label>
+                                        <Label Grid.Row="2" Grid.Column="0" Text="Sacas: " />
+                                        <Label Grid.Row="2" Grid.Column="1" FontFamily="{StaticResource CentraleSansRndXBold}" Text="{Binding QuantidadeSacas, StringFormat='{0:N0}'}">
+                                        </Label>
+                                        <Label Grid.Row="3" Grid.Column="0" Text="Safra: " />
+                                        <Label Grid.Row="3" Grid.Column="1" FontFamily="{StaticResource CentraleSansRndXBold}" Text="{Binding SafraDescricao}">
+                                        </Label>
+                                    </Grid>
+                                </Frame>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

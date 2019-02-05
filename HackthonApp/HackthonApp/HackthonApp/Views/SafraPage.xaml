@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="HackthonApp.Views.SafraPage" Title="Safra">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Margin="20">
+                <Label Margin="0,50,0,0" Text="Selecione a Safra que deseja calcular" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" FontSize="Large"/>
+                <Picker Title="Safra" Margin="0,20,0,20" ItemsSource="{Binding ListaSafras}" ItemDisplayBinding="{Binding Descricao}" SelectedItem="{Binding Safra}"/>
+            
+                <Button Text="Próximo" Clicked="Handle_ProximoClicked"></Button>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="HackthonApp.Views.ProdutividadePage" Title="Cálculo Produtividade">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Icon="ic_logout" Text="Voltar" Clicked="Handle_Clicked" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Margin="20">
+                <Label Margin="0,50,0,0" Text="Simulação de custos" HorizontalOptions="CenterAndExpand" FontSize="Large" HorizontalTextAlignment="Center" />
+                <Label Text="Sacas / Ha (previsto)" Margin="0,20,0,0" />
+                <Entry Text="{Binding ConsultaCusto.RecepcaoPorHa, StringFormat='{0:C2}'}" TextChanged="Handle_TextChanged" Keyboard="Numeric" />
+                <Grid Margin="0,30,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50" />
+                        <RowDefinition Height="50" />
+                        <RowDefinition Height="50" />
+                        <RowDefinition Height="50" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="2*" />
+                    </Grid.ColumnDefinitions>
+                    <Label Text="Rentabilidade" Grid.Row="0" Grid.Column="0" />
+                    <Label Text="{Binding ConsultaCusto.Rentabilidade, StringFormat=\{0:N2\}}" Grid.Row="0" Grid.Column="1" HorizontalOptions="CenterAndExpand" FontFamily="{StaticResource CentraleSansRndXBold}" />
+                    <Label Text="Receita" Grid.Row="1" Grid.Column="0" />
+                    <Label Text="{Binding ConsultaCusto.TotalReceita, StringFormat=\{0:N2\}}" Grid.Row="1" Grid.Column="1" HorizontalOptions="CenterAndExpand" FontFamily="{StaticResource CentraleSansRndXBold}" TextColor="{StaticResource Verde}" />
+                    <Label Text="Despesas" Grid.Row="2" Grid.Column="0" />
+                    <Label Text="{Binding ConsultaCusto.TotalDespesa, StringFormat=\{0:N2\}}" Grid.Row="2" Grid.Column="1" HorizontalOptions="CenterAndExpand" FontFamily="{StaticResource CentraleSansRndXBold}" TextColor="{StaticResource Vermelho}" />
+                    <Label Text="Cotação" Grid.Row="3" Grid.Column="0" />
+                    <Label Text="{Binding ConsultaCusto.CotacaoVariavel,StringFormat=\{0:N2\}}" Grid.Row="3" Grid.Column="1" HorizontalOptions="CenterAndExpand" FontFamily="{StaticResource CentraleSansRndXBold}" />
+                </Grid>
+                <Slider ValueChanged="Handle_ValueChanged" Value="{Binding ConsultaCusto.SliderValue}" Minimum="0" Maximum="1" Margin="30,0" Scale="1.3" HorizontalOptions="FillAndExpand" ThumbColor="{StaticResource Verde}" MinimumTrackColor="{StaticResource VerdeEscuro}" MaximumTrackColor="{StaticResource Vermelho}" />
+                <Button Text="Salvar" Clicked="Handle_SalvarClicked" Margin="0,40,0,0">
+                </Button>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
