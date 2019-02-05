@@ -1,0 +1,493 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="AgriconWebApiModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Despesas">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="Insumos" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Operacionais" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Outros" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="PropriedadeSafraId" Type="bigint" />
+        </EntityType>
+        <EntityType Name="PrecoAgricola">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="Descricao" Type="nvarchar(max)" />
+          <Property Name="Valor" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="Produtor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="Nome" Type="nvarchar(max)" />
+          <Property Name="CPF" Type="nvarchar(max)" />
+          <Property Name="Senha" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Propriedade">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CadPro" Type="nvarchar(max)" />
+          <Property Name="Area" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Nome" Type="nvarchar(max)" />
+          <Property Name="ProdutorId" Type="bigint" />
+        </EntityType>
+        <EntityType Name="PropriedadeSafra">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="PropriedadeId" Type="bigint" />
+          <Property Name="SafraId" Type="bigint" />
+          <Property Name="Status" Type="bit" />
+        </EntityType>
+        <EntityType Name="Recepcao">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="QuantidadeSacas" Type="bigint" />
+          <Property Name="PropriedadeSafraId" Type="bigint" />
+        </EntityType>
+        <EntityType Name="ResultadoSimulacao">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="QuantidadeSacas" Type="bigint" />
+          <Property Name="Preco" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="SomaDespesas" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="SomaReceitas" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Rentabilidade" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="PropriedadeSafraId" Type="bigint" />
+        </EntityType>
+        <EntityType Name="Safra">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="Descricao" Type="nvarchar(max)" />
+        </EntityType>
+        <Association Name="FK_Despesas_PropriedadeSafra">
+          <End Role="PropriedadeSafra" Type="Self.PropriedadeSafra" Multiplicity="0..1" />
+          <End Role="Despesas" Type="Self.Despesas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PropriedadeSafra">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Despesas">
+              <PropertyRef Name="PropriedadeSafraId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Propriedade_Produtor">
+          <End Role="Produtor" Type="Self.Produtor" Multiplicity="0..1" />
+          <End Role="Propriedade" Type="Self.Propriedade" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produtor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Propriedade">
+              <PropertyRef Name="ProdutorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PropriedadeSafra_Propriedade">
+          <End Role="Propriedade" Type="Self.Propriedade" Multiplicity="0..1" />
+          <End Role="PropriedadeSafra" Type="Self.PropriedadeSafra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Propriedade">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PropriedadeSafra">
+              <PropertyRef Name="PropriedadeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PropriedadeSafra_Safra">
+          <End Role="Safra" Type="Self.Safra" Multiplicity="0..1" />
+          <End Role="PropriedadeSafra" Type="Self.PropriedadeSafra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Safra">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PropriedadeSafra">
+              <PropertyRef Name="SafraId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Recepcao_PropriedadeSafra">
+          <End Role="PropriedadeSafra" Type="Self.PropriedadeSafra" Multiplicity="0..1" />
+          <End Role="Recepcao" Type="Self.Recepcao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PropriedadeSafra">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Recepcao">
+              <PropertyRef Name="PropriedadeSafraId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ResultadoSimulacao_PropriedadeSafra">
+          <End Role="PropriedadeSafra" Type="Self.PropriedadeSafra" Multiplicity="0..1" />
+          <End Role="ResultadoSimulacao" Type="Self.ResultadoSimulacao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PropriedadeSafra">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ResultadoSimulacao">
+              <PropertyRef Name="PropriedadeSafraId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AgriconWebApiModelStoreContainer">
+          <EntitySet Name="Despesas" EntityType="Self.Despesas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PrecoAgricola" EntityType="Self.PrecoAgricola" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Produtor" EntityType="Self.Produtor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Propriedade" EntityType="Self.Propriedade" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PropriedadeSafra" EntityType="Self.PropriedadeSafra" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Recepcao" EntityType="Self.Recepcao" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ResultadoSimulacao" EntityType="Self.ResultadoSimulacao" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Safra" EntityType="Self.Safra" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Despesas_PropriedadeSafra" Association="Self.FK_Despesas_PropriedadeSafra">
+            <End Role="PropriedadeSafra" EntitySet="PropriedadeSafra" />
+            <End Role="Despesas" EntitySet="Despesas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Propriedade_Produtor" Association="Self.FK_Propriedade_Produtor">
+            <End Role="Produtor" EntitySet="Produtor" />
+            <End Role="Propriedade" EntitySet="Propriedade" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PropriedadeSafra_Propriedade" Association="Self.FK_PropriedadeSafra_Propriedade">
+            <End Role="Propriedade" EntitySet="Propriedade" />
+            <End Role="PropriedadeSafra" EntitySet="PropriedadeSafra" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PropriedadeSafra_Safra" Association="Self.FK_PropriedadeSafra_Safra">
+            <End Role="Safra" EntitySet="Safra" />
+            <End Role="PropriedadeSafra" EntitySet="PropriedadeSafra" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Recepcao_PropriedadeSafra" Association="Self.FK_Recepcao_PropriedadeSafra">
+            <End Role="PropriedadeSafra" EntitySet="PropriedadeSafra" />
+            <End Role="Recepcao" EntitySet="Recepcao" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ResultadoSimulacao_PropriedadeSafra" Association="Self.FK_ResultadoSimulacao_PropriedadeSafra">
+            <End Role="PropriedadeSafra" EntitySet="PropriedadeSafra" />
+            <End Role="ResultadoSimulacao" EntitySet="ResultadoSimulacao" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AgriconWebApiModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Despesas">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="Insumos" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Operacionais" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Outros" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PropriedadeSafraId" Type="Int64" />
+          <NavigationProperty Name="PropriedadeSafra" Relationship="Self.FK_Despesas_PropriedadeSafra" FromRole="Despesas" ToRole="PropriedadeSafra" />
+        </EntityType>
+        <EntityType Name="PrecoAgricola">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="Descricao" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Valor" Type="Decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="Produtor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="Nome" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CPF" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Senha" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Propriedade" Relationship="Self.FK_Propriedade_Produtor" FromRole="Produtor" ToRole="Propriedade" />
+        </EntityType>
+        <EntityType Name="Propriedade">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CadPro" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Area" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Nome" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ProdutorId" Type="Int64" />
+          <NavigationProperty Name="Produtor" Relationship="Self.FK_Propriedade_Produtor" FromRole="Propriedade" ToRole="Produtor" />
+          <NavigationProperty Name="PropriedadeSafra" Relationship="Self.FK_PropriedadeSafra_Propriedade" FromRole="Propriedade" ToRole="PropriedadeSafra" />
+        </EntityType>
+        <EntityType Name="PropriedadeSafra">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="PropriedadeId" Type="Int64" />
+          <Property Name="SafraId" Type="Int64" />
+          <Property Name="Status" Type="Boolean" />
+          <NavigationProperty Name="Despesas" Relationship="Self.FK_Despesas_PropriedadeSafra" FromRole="PropriedadeSafra" ToRole="Despesas" />
+          <NavigationProperty Name="Propriedade" Relationship="Self.FK_PropriedadeSafra_Propriedade" FromRole="PropriedadeSafra" ToRole="Propriedade" />
+          <NavigationProperty Name="Safra" Relationship="Self.FK_PropriedadeSafra_Safra" FromRole="PropriedadeSafra" ToRole="Safra" />
+          <NavigationProperty Name="Recepcao" Relationship="Self.FK_Recepcao_PropriedadeSafra" FromRole="PropriedadeSafra" ToRole="Recepcao" />
+          <NavigationProperty Name="ResultadoSimulacao" Relationship="Self.FK_ResultadoSimulacao_PropriedadeSafra" FromRole="PropriedadeSafra" ToRole="ResultadoSimulacao" />
+        </EntityType>
+        <EntityType Name="Recepcao">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="QuantidadeSacas" Type="Int64" />
+          <Property Name="PropriedadeSafraId" Type="Int64" />
+          <NavigationProperty Name="PropriedadeSafra" Relationship="Self.FK_Recepcao_PropriedadeSafra" FromRole="Recepcao" ToRole="PropriedadeSafra" />
+        </EntityType>
+        <EntityType Name="ResultadoSimulacao">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="QuantidadeSacas" Type="Int64" />
+          <Property Name="Preco" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="SomaDespesas" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="SomaReceitas" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Rentabilidade" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PropriedadeSafraId" Type="Int64" />
+          <NavigationProperty Name="PropriedadeSafra" Relationship="Self.FK_ResultadoSimulacao_PropriedadeSafra" FromRole="ResultadoSimulacao" ToRole="PropriedadeSafra" />
+        </EntityType>
+        <EntityType Name="Safra">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="Descricao" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PropriedadeSafra" Relationship="Self.FK_PropriedadeSafra_Safra" FromRole="Safra" ToRole="PropriedadeSafra" />
+        </EntityType>
+        <Association Name="FK_Despesas_PropriedadeSafra">
+          <End Role="PropriedadeSafra" Type="Self.PropriedadeSafra" Multiplicity="0..1" />
+          <End Role="Despesas" Type="Self.Despesas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PropriedadeSafra">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Despesas">
+              <PropertyRef Name="PropriedadeSafraId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Propriedade_Produtor">
+          <End Role="Produtor" Type="Self.Produtor" Multiplicity="0..1" />
+          <End Role="Propriedade" Type="Self.Propriedade" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produtor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Propriedade">
+              <PropertyRef Name="ProdutorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PropriedadeSafra_Propriedade">
+          <End Role="Propriedade" Type="Self.Propriedade" Multiplicity="0..1" />
+          <End Role="PropriedadeSafra" Type="Self.PropriedadeSafra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Propriedade">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PropriedadeSafra">
+              <PropertyRef Name="PropriedadeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PropriedadeSafra_Safra">
+          <End Role="Safra" Type="Self.Safra" Multiplicity="0..1" />
+          <End Role="PropriedadeSafra" Type="Self.PropriedadeSafra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Safra">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PropriedadeSafra">
+              <PropertyRef Name="SafraId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Recepcao_PropriedadeSafra">
+          <End Role="PropriedadeSafra" Type="Self.PropriedadeSafra" Multiplicity="0..1" />
+          <End Role="Recepcao" Type="Self.Recepcao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PropriedadeSafra">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Recepcao">
+              <PropertyRef Name="PropriedadeSafraId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ResultadoSimulacao_PropriedadeSafra">
+          <End Role="PropriedadeSafra" Type="Self.PropriedadeSafra" Multiplicity="0..1" />
+          <End Role="ResultadoSimulacao" Type="Self.ResultadoSimulacao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PropriedadeSafra">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ResultadoSimulacao">
+              <PropertyRef Name="PropriedadeSafraId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AgriconWebApiEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Despesas" EntityType="Self.Despesas" />
+          <EntitySet Name="PrecoAgricola" EntityType="Self.PrecoAgricola" />
+          <EntitySet Name="Produtor" EntityType="Self.Produtor" />
+          <EntitySet Name="Propriedade" EntityType="Self.Propriedade" />
+          <EntitySet Name="PropriedadeSafra" EntityType="Self.PropriedadeSafra" />
+          <EntitySet Name="Recepcao" EntityType="Self.Recepcao" />
+          <EntitySet Name="ResultadoSimulacao" EntityType="Self.ResultadoSimulacao" />
+          <EntitySet Name="Safra" EntityType="Self.Safra" />
+          <AssociationSet Name="FK_Despesas_PropriedadeSafra" Association="Self.FK_Despesas_PropriedadeSafra">
+            <End Role="PropriedadeSafra" EntitySet="PropriedadeSafra" />
+            <End Role="Despesas" EntitySet="Despesas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Propriedade_Produtor" Association="Self.FK_Propriedade_Produtor">
+            <End Role="Produtor" EntitySet="Produtor" />
+            <End Role="Propriedade" EntitySet="Propriedade" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PropriedadeSafra_Propriedade" Association="Self.FK_PropriedadeSafra_Propriedade">
+            <End Role="Propriedade" EntitySet="Propriedade" />
+            <End Role="PropriedadeSafra" EntitySet="PropriedadeSafra" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PropriedadeSafra_Safra" Association="Self.FK_PropriedadeSafra_Safra">
+            <End Role="Safra" EntitySet="Safra" />
+            <End Role="PropriedadeSafra" EntitySet="PropriedadeSafra" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Recepcao_PropriedadeSafra" Association="Self.FK_Recepcao_PropriedadeSafra">
+            <End Role="PropriedadeSafra" EntitySet="PropriedadeSafra" />
+            <End Role="Recepcao" EntitySet="Recepcao" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ResultadoSimulacao_PropriedadeSafra" Association="Self.FK_ResultadoSimulacao_PropriedadeSafra">
+            <End Role="PropriedadeSafra" EntitySet="PropriedadeSafra" />
+            <End Role="ResultadoSimulacao" EntitySet="ResultadoSimulacao" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="AgriconWebApiModelStoreContainer" CdmEntityContainer="AgriconWebApiEntities">
+          <EntitySetMapping Name="Despesas">
+            <EntityTypeMapping TypeName="AgriconWebApiModel.Despesas">
+              <MappingFragment StoreEntitySet="Despesas">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Insumos" ColumnName="Insumos" />
+                <ScalarProperty Name="Operacionais" ColumnName="Operacionais" />
+                <ScalarProperty Name="Outros" ColumnName="Outros" />
+                <ScalarProperty Name="PropriedadeSafraId" ColumnName="PropriedadeSafraId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PrecoAgricola">
+            <EntityTypeMapping TypeName="AgriconWebApiModel.PrecoAgricola">
+              <MappingFragment StoreEntitySet="PrecoAgricola">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Produtor">
+            <EntityTypeMapping TypeName="AgriconWebApiModel.Produtor">
+              <MappingFragment StoreEntitySet="Produtor">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="CPF" ColumnName="CPF" />
+                <ScalarProperty Name="Senha" ColumnName="Senha" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Propriedade">
+            <EntityTypeMapping TypeName="AgriconWebApiModel.Propriedade">
+              <MappingFragment StoreEntitySet="Propriedade">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CadPro" ColumnName="CadPro" />
+                <ScalarProperty Name="Area" ColumnName="Area" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="ProdutorId" ColumnName="ProdutorId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PropriedadeSafra">
+            <EntityTypeMapping TypeName="AgriconWebApiModel.PropriedadeSafra">
+              <MappingFragment StoreEntitySet="PropriedadeSafra">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PropriedadeId" ColumnName="PropriedadeId" />
+                <ScalarProperty Name="SafraId" ColumnName="SafraId" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Recepcao">
+            <EntityTypeMapping TypeName="AgriconWebApiModel.Recepcao">
+              <MappingFragment StoreEntitySet="Recepcao">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="QuantidadeSacas" ColumnName="QuantidadeSacas" />
+                <ScalarProperty Name="PropriedadeSafraId" ColumnName="PropriedadeSafraId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ResultadoSimulacao">
+            <EntityTypeMapping TypeName="AgriconWebApiModel.ResultadoSimulacao">
+              <MappingFragment StoreEntitySet="ResultadoSimulacao">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="QuantidadeSacas" ColumnName="QuantidadeSacas" />
+                <ScalarProperty Name="Preco" ColumnName="Preco" />
+                <ScalarProperty Name="SomaDespesas" ColumnName="SomaDespesas" />
+                <ScalarProperty Name="SomaReceitas" ColumnName="SomaReceitas" />
+                <ScalarProperty Name="Rentabilidade" ColumnName="Rentabilidade" />
+                <ScalarProperty Name="PropriedadeSafraId" ColumnName="PropriedadeSafraId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Safra">
+            <EntityTypeMapping TypeName="AgriconWebApiModel.Safra">
+              <MappingFragment StoreEntitySet="Safra">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
